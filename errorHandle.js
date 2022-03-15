@@ -1,14 +1,10 @@
-function errorHandle(res){
-    const headers = {
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'PATCH, POST, GET,OPTIONS,DELETE',
-        'Content-Type': 'application/json'
-    }
-    res.writeHead(400,headers);
+const config = require('./config');
+
+function errorHandle(res,msg){
+    res.writeHead(400,config.headers);
     res.write(JSON.stringify({
-        "status": "false",
-        "message": "欄位未填寫正確，或無此 todo id",
+        "status": "error",
+        "message": msg,
     }));
     res.end();
 }
